@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background:  #0a0a0a;
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme:dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -19,3 +19,67 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+.border-gradient{
+  position: relative;
+}
+
+.border-gradient::before{
+  position: absolute;
+  content: "";
+  inset: 0;
+  border-radius: 10px;
+  pointer-events: none;
+  padding: 2px;
+  background: linear-gradient(45deg,	#bcf5f5,#CDDC39, #E6EE9C);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.box{
+  position: relative;
+  margin: 25px;
+  width: fit-content;
+  height: fit-content;
+}
+.box::before{
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: linear-gradient(-45deg,#bcf5f5,#CDDC39, #E6EE9C);
+  transform: translate3d(0px, 30px, 20px) scale(0.75);
+  filter: blur(50px);
+  
+  transition: opacity 0.3s ease-in-out;
+  border-radius: inherit;
+
+}
+.box:hover::before{
+  transform: translate3d(0px, 40px, 0px) scale(0.9);
+  transition: opacity 0.3s ease-in-out;
+}
+.box::after{
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: inherit; 
+  border-radius: inherit;
+}
+.short_description{
+  overflow: hidden;
+  min-height: 50px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: pre-wrap;
+}
+
+
+
