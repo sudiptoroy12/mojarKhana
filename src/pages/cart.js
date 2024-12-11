@@ -1,8 +1,12 @@
 import { CartContext } from "@/utils/ContextReducer";
 import React, { useContext } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = () => {
   const { state, dispatch } = useContext(CartContext);
+
+
   const handleCheckout =async () => {
     const email = localStorage.getItem("myemail")
     const order_data = state
@@ -16,16 +20,55 @@ const Cart = () => {
        })
        let response=await res.json()
 
-       console.log(response)
-       if(response.success){
+       
+        if(response.success){
+       
+               toast.success('You are checked out successfully .....', {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+           
+            });
+            setTimeout(() => {
+              dispatch({ case: "DROP" });
+            },1200);
+           
+        }
+        else{
+            toast.success(response.error, {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+               
+                });
+        }
         
- dispatch({ case: "DROP" });
-       }
+
+       
       
    
   };
   let totalPrice = state.reduce((total, data) => total + data.price, 0);
   return (
+    <div >   <ToastContainer
+    position="top-left"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    />
     <div
       style={{ minHeight: "90vh" }}
       className="flex items-center mx-10 justify-center"
@@ -88,13 +131,13 @@ const Cart = () => {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="1.5"
+                              strokeWidth="1.5"
                               stroke="currentColor"
                               className="size-4"
                             >
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                               />
                             </svg>
@@ -110,13 +153,13 @@ const Cart = () => {
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
-                              stroke-width="1.5"
+                              strokeWidth="1.5"
                               stroke="currentColor"
                               className="size-4"
                             >
                               <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                               />
                             </svg>
@@ -134,13 +177,13 @@ const Cart = () => {
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="currentColor"
                                 className="size-6"
                               >
                                 <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
                                   d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
                                 />
                               </svg>
@@ -173,6 +216,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

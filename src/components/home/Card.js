@@ -51,9 +51,9 @@ const Card = (props) => {
         <div className="relative w-full h-80 border-2 border-black dark:border-none  ">
           <Image
             src={foodData.img}
-            layout="fill"
-            objectFit="cover"
             alt="burger"
+            fill
+          sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw"
           />
         </div></Link>
         <div className="p-4">

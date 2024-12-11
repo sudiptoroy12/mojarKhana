@@ -17,11 +17,12 @@ const Slug = (props) => {
         <div className='box '>
       <div className='container border-gradient mx-auto flex items-center flex-col w-96 p-3  bg-gray-100 dark:bg-black rounded-md '>
         <div className='relative w-full h-96 border-2 border-black rounded-lg '>
-            <Image src={props.datas.img}
+            <Image 
+            src={props.datas.img} alt="image"
+            fill
+            sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw"
             className="rounded-xl"
-            layout="fill"
-            objectFit="cover"
-            alt="image"
+            
             />
         </div>
     <div className='font-bold text-lg uppercase m-4 font-serif '>{props.datas.name}</div>

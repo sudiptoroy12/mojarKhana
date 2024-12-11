@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import db from "@/utils/db"
 
- const jwtSecret ="shuvo"
+
 export default async function handler(req, res) {
 let success=false
 const salt = await bcrypt.genSalt(10)
@@ -28,7 +28,7 @@ if(req.method === 'POST'){
                 }
             }
          
-            const token= jwt.sign(data,jwtSecret)
+            const token= jwt.sign(data,process.env.JWT_SECRET)
             success= true
            
             res.json({success:success,token:token})

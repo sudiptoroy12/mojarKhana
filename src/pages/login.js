@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
-  const logout=()=>{
-    localStorage.removeItem("myuser");
-    localStorage.removeItem("myemail");
-  }
+
     const router = useRouter()
     const[email,setEamil]=useState('')
     const[password,setPassword]=useState('')
@@ -35,13 +34,50 @@ const Login = () => {
             localStorage.setItem("myuser",response.token)
             localStorage.setItem("myemail",response.email)
            localStorage.setItem("myAdmin",JSON.parse(response.isAdmin))
-      router.push("/")
+           toast.success('You are successfully logged in.....', {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+           
+            });
+            setTimeout(() => {
+               router.push("/")
+          },1200);
+     
            }
+           else{
+            toast.success(response.error, {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+               
+                });
+        }
            
       }
 
   return (
-    <div style={{height:"90vh" }} className='flex justify-center items-center w-full '>
+   <div>
+   <ToastContainer
+    position="top-left"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    />
+    <div  style={{height:"90vh" }} className='flex justify-center items-center w-full '>
         <div className='container max-w-md box'>
         <form onSubmit={handleSubmit} className='bg-gray-100 text-black dark:bg-black dark:text-white border-gradient rounded-lg shadow-2xl px-8 pt-5'>
             <div className='mb-2'>
@@ -53,7 +89,7 @@ const Login = () => {
             </div>
        
             <div className='mb-2'>
-                <label htmlFor='email'>
+                <label htmlFor='password'>
                    Password
                 </label>
                 <input onChange={handleChange}  name='password' type='password' placeholder='*****'  value={password} required className='shadow-lg appearance-none border border-black dark:border-gray-200 rounded w-full py-2 px-3  mt-1  focus:border-red-500 focus:outline-none   dark:text-gray-100 ' >
@@ -69,14 +105,12 @@ const Login = () => {
                
                New User 
             </button></Link>
-            <Link href={"/signup"}>
-            <button onClick={logout}  type="submit" className='bg-gray-950 text-white border font-bold rounded-lg dark:border-white hover:bg-gradient-to-l hover:from-teal-400 hover:via-lime-500 hover:to-lime-400 px-4 py-1 my-4 mx-4 hover:text-black border-black'>
-               
-               logout
-            </button></Link>
+         
+        
 </div>
         </form>
      </div>
+    </div>
     </div>
   )
 }

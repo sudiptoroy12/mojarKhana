@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
     const router = useRouter()
@@ -41,12 +43,50 @@ const Signup = () => {
            let response=await res.json()
 
            console.log(response)
-           router.push("/login")
+           if(response.success){
+           toast.success('You are signup successfully .....', {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+           
+            });
+            setTimeout(() => {
+               router.push("/login")
+          },1200);
+        }
+          else{
+            toast.success(response.error, {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+               
+                });
+            }
            
       }
 
   return (
-    <div style={{height:"90vh" }} className='flex justify-center items-center w-full '>
+    <div>
+    <ToastContainer
+     position="top-left"
+     autoClose={5000}
+     hideProgressBar={false}
+     newestOnTop={false}
+     closeOnClick
+     rtl={false}
+     pauseOnFocusLoss
+     draggable
+     pauseOnHover
+     />
+    <div style={{minHeight:"90vh" }} className='flex justify-center items-center w-full '>
         <div className='container max-w-md box'>
         <form onSubmit={handleSubmit} className='bg-gray-100  dark:bg-black dark:text-white border-gradient rounded-lg  px-8 pt-5 '>
             <div className='mb-2'>
@@ -99,6 +139,7 @@ const Signup = () => {
 </div>
         </form>
      </div>
+    </div>
     </div>
   )
 }

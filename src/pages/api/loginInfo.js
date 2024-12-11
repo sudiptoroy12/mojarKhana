@@ -6,7 +6,8 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import db from "@/utils/db"
 
- const jwtSecret ="shuvo"
+
+
 export default async function handler(req, res) {
 let success=false
 
@@ -30,14 +31,14 @@ if(req.method === 'POST'){
                 }
             }
            
-            const token= jwt.sign(data,jwtSecret)
+            const token= jwt.sign(data, process.env.JWT_SECRET)
             success= true
            
             res.json({success:success,token:token,email:user.email,isAdmin:user.isAdmin})
         }
         
     catch (error) {
-        res.json({error:error.message})
+        res.json({success:false,error:error.message})
     }
  
   }

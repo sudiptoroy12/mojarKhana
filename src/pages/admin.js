@@ -1,10 +1,11 @@
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const admin = () => {
-    const router = useRouter()
+    
     const[name,setName]=useState('')
     const[category,setCategory]=useState('')
     const[foodType,setFoodType]=useState('')
@@ -62,8 +63,32 @@ const admin = () => {
 
            console.log(response)
            if(response.success){
-            alert("Data created successfully")
-           }
+         
+                 toast.success('Data created successfully....', {
+              position: "top-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+             
+              });
+           
+             
+          }
+          else{
+              toast.success(response.error, {
+                  position: "top-left",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                 
+                  });
+          }
            
            
       }
@@ -76,7 +101,17 @@ const admin = () => {
       },[])
       
   return (
-    <>
+    <div >   <ToastContainer
+    position="top-left"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    />
     {
         seen ?  <div style={{minHeight:"100vh" }} className='flex flex-col items-center  w-full mt-10 '>
         <div className='container max-w-md box '>
@@ -93,7 +128,7 @@ const admin = () => {
                 >
                     Category
                 </label>
-                <select onChange={handleChange} name='category' type='text' placeholder='Foods category' style={{"-webkit-appearance":"auto"}} value={category} required className='shadow-lg appearance-none border border-gray-400 rounded w-full py-2 px-3  mt-1 focus:border-red-600 text-gray-700 focus:outline-none  dark:text-gray-100 ' >
+                <select onChange={handleChange} name='category' type='text' placeholder='Foods category' style={{"WebkitAppearance":"auto"}} value={category} required className='shadow-lg appearance-none border border-gray-400 rounded w-full py-2 px-3  mt-1 focus:border-red-600 text-gray-700 focus:outline-none  dark:text-gray-100 ' >
                     <option value="nan">Select Category</option>
                     <option value="Pizza">Pizza</option>
                     <option value="SIDES & BEVERAGES">Sides & Beverages</option>
@@ -104,7 +139,7 @@ const admin = () => {
                 <label htmlFor='foodType' >
                    FoodType
                 </label>
-                <select onChange={handleChange}  name='foodType' type='password' placeholder='Food type'  value={foodType} style={{"-webkit-appearance":"auto"}} required className='shadow-lg appearance-none border border-gray-400 rounded w-full py-2  mt-1 px-3 focus:border-red-600 focus:outline-none text-black dark:text-gray-100 ' >
+                <select onChange={handleChange}  name='foodType' type='password' placeholder='Food type'  value={foodType} style={{"WebkitAppearance":"auto"}} required className='shadow-lg appearance-none border border-gray-400 rounded w-full py-2  mt-1 px-3 focus:border-red-600 focus:outline-none text-black dark:text-gray-100 ' >
                 <option value="nan">Select FoodType</option>
                     <option value="Veg">Veg</option>
                     <option value="Non-Veg">Non-Veg</option>
@@ -164,7 +199,7 @@ const admin = () => {
      </div>
     </div> : <div className='text-white'>not found</div>
     }
-    </>
+   </div>
   
   )
 }
