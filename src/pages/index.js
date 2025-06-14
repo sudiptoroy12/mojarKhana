@@ -6,6 +6,7 @@ import Card from "@/components/home/Card";
 import { useState } from "react";
 import Login from "./login";
 import { baseUrl } from "../../baseUrl";
+import Head from "next/head";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,7 +38,9 @@ export default function Home(props) {
   
   return ( 
   <>
-  
+  <Head>
+    <title>MojarKhana</title>
+  </Head>
       <Carouselpic/>
       <div className="container mx-auto">
         <div className="text-white my-6 mx-14 space-x-6">
