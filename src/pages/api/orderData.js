@@ -28,8 +28,8 @@ export default async function handler(req, res) {
            res.json({error:error.message}) 
         }
       
-       
+        await db.disconnect()
     }
- await db.disconnect()
+
 
 }

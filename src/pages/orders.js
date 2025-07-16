@@ -22,21 +22,22 @@ const orders = () => {
     useEffect(()=>{
         fetchdata()
     },[])
-    console.log(datas);
+  
     
   return (
     <div className='text-black dark:text-white flex flex-col mx-auto items-center '>
      {
-        datas.map((orderdata)=>{
-            return(<>{orderdata.map((data,index)=>{
+        datas.map((orderdata,index)=>{
+            return(<div key={index}>{orderdata.map((data,index)=>{
                 return( 
                     <div key={index} className="box  ">
                     <div className=' font-bold text-2xl dark:bg-black  bg-gray-100 rounded-md '>
-                    {data.order_date?(<div className='p-4 border-2 border-black  rounded-lg'>{data.order_date} <hr className=''/></div>) : ( <div className='border-gradient p-4  '>  <div className='relative w-80 h-80 border-2 border-black rounded-lg'>
+                    {data.order_date?(<div className='p-4 border-2 border-black    rounded-lg'>{data.order_date} <hr className=''/></div>) : ( <div className='border-gradient p-4  '>  <div className='relative w-80 h-80 border-2 border-black rounded-lg'>
             <Image src={data.img}
             className="rounded-xl"
             fill
-            sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw"
+             sizes="(max-width:768px) 100vw,(max-width:1200px) 50vw"
+           
             alt="image"
             />
         </div>
@@ -49,7 +50,7 @@ const orders = () => {
         </div> )}
                </div></div>)
             })}
-          </>)
+          </div>)
         })
      }
     </div>

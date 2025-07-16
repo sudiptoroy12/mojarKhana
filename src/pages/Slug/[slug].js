@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { baseUrl } from '../../../baseUrl'
+import { baseUrl } from '../../utils/baseUrl'
 
 const Slug = (props) => {
   

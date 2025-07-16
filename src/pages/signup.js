@@ -5,9 +5,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
-    const router = useRouter()
+     const router = useRouter()
+
+// const [credentials, setCredentials] = useState({name:'',email:'', password:'', phone: '', address: '',})
+
+
+
+// const handleChange=(e)=>{
+//     setCredentials({...credentials,[e.target.name]:e.target.value})
+// }
+
     const[name,setName]=useState('')
-    const[email,setEamil]=useState('')
+    const[email,setEmail]=useState('')
     const[password,setPassword]=useState('')
     const[phone,setPhone]=useState('')
     const[address,setAddress]=useState('')
@@ -18,7 +27,7 @@ const Signup = () => {
           setName( e.target.value)
        }
         else if(e.target.name=="email"){
-          setEamil( e.target.value)
+          setEmail( e.target.value)
        }
        else if(e.target.name=="password"){
           setPassword (e.target.value)
@@ -129,7 +138,7 @@ const Signup = () => {
             <div className='flex'>
             <button  type="submit"className='bg-gray-950 text-gray-100 border font-bold rounded-lg hover:bg-gradient-to-l hover:from-teal-400 hover:via-lime-500 hover:to-lime-400 px-4 py-1 my-4  hover:text-black border-black dark:border-white'>
                
-               Login 
+               SignUp 
             </button>
             <Link href={"/login"}>
             <button  type="submit" className='bg-gray-950 text-gray-100 border dark:border-white  font-bold rounded-lg hover:bg-gradient-to-l hover:from-teal-400 hover:via-lime-500 hover:to-lime-400 px-4 py-1 my-4 mx-4 hover:text-black border-black'>

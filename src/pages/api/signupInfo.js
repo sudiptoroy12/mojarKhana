@@ -21,7 +21,7 @@ if(req.method === 'POST'){
             phone:req.body.phone,
             address:req.body.address,
           
-        }).then(async(user)=>{
+        }).then((user)=>{
             const data ={
                 user:{
                     id:user["_id"]
